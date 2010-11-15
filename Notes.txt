@@ -1,0 +1,55 @@
+VNTyper Version 0.4.0
+
+=========== TODO ============
+
+1.	Add a [V] button that will attach to the currently edit textfield, a shortcut to enabled/disable VNTyper
+2.	Add context menu to access extended functionalities like auto change encoder
+3.	Implement encoder probabilites checks when paste text from clipboard
+4.	Add spell checking (?)
+5.	Add return to english if spelling check fail (?)
+6.	Implement auto test input string (input > output)
+
+
+=========== Strings to test ============ 
+
+( "<" means left arrow )
+
+thuowr		thuở
+thuowrng	thưởng
+
+ngoiwf<<u	người
+gifa		già
+haf<o		hòa
+hafn<<o		hoàn
+
+gifow		giờ
+gifa		già
+
+hi6			hi6
+hy6			hy6
+hi7			hi7
+hy7			hy7
+hew			hew
+he7			he7
+
+=========== Developer's Notes ============ 
+
+This part is for anyone who wants to contribute or dive into the code to understand how things in this library works
+
+1. Core			: 
+	Char <-- Vowel, Consonant : Dictionary and utilities for VN single characters (add, remove accent, caret, find the base, origin, uppercase/lowercase)
+	Word 		: 4 parts - firstC, vowel, lastC, remain : Check if a key is valid accent/ caret or not to be put into the current word, split word into parts and join
+	VNTyperCore	: Processing a textfield's input, use Word to check and replace the typing text when neccessary to form VN words
+	Encoder		: Base class for all encoders
+	TypeMode	: Base class for all TypeModes
+	
+2.	Encoders	: by default a null encoder will be unicode based
+		VniEncoder : Use for Vni fonts
+		(you can add more Encoders like TCVN by extending Encoder just like VniEncoder)
+		
+3.	TypeModes	: by default VNTyper use TelexVni mode
+		VniMode		: Use VNI input style (numeric for accents and carets)
+		TelexMode	: Use Telex input style (Alphabet for accents and carets)
+		TelexVniMode: Mix of Telex and Vni mode (can use both numeric or alphabets for accents and carets)
+		(you can add more TypingModes like VIQR, MS VI, ... by extending TypeMode just like VniEncoder)
+
