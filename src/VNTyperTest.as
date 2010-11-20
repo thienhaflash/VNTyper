@@ -7,6 +7,7 @@
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
+	import vn.typer.encode.VniEncoder;
 	import vn.typer.VNTyper;
 	/**
 	 * ...
@@ -21,11 +22,14 @@
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
 			addChild(newTextfield());
-			addChild(newTextfield(0, 100));
+			var tf : TextField = newTextfield(0, 100);
+			addChild(tf);
+			tf.text = "đó là một buổi chiều mùa hạ";
 			
-			VNTyper.initialize(stage);
-			//VNTyper.initialize(getChildAt(1));
-			//trace(VNTyper.info);
+			VNTyper.initialize(stage)
+					.addFont("Vni-Thuphap", new VNINetbut_FontClass(), new VniEncoder());
+					
+			VNTyper.instance.applyFont(tf, "Vni-Thuphap");
 		}
 		
 		protected function newTextfield(px: Number = 0, py: Number = 0): TextField {

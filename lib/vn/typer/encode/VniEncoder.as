@@ -55,6 +55,9 @@ package vn.typer.encode
 			return ns;
 		}
 		
+		public static function get id(): String {
+			return "VniEncoder";
+		}
 	}
 
 }

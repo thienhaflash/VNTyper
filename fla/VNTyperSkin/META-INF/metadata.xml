@@ -5,8 +5,8 @@
             xmlns:xmp="http://ns.adobe.com/xap/1.0/">
          <xmp:CreatorTool>Adobe Flash CS4 Professional</xmp:CreatorTool>
          <xmp:CreateDate>2010-03-11T14:14:58+07:00</xmp:CreateDate>
-         <xmp:MetadataDate>2010-11-16T01:10:30+07:00</xmp:MetadataDate>
-         <xmp:ModifyDate>2010-11-16T01:10:30+07:00</xmp:ModifyDate>
+         <xmp:MetadataDate>2010-11-20T18:58:34+07:00</xmp:MetadataDate>
+         <xmp:ModifyDate>2010-11-20T18:58:34+07:00</xmp:ModifyDate>
       </rdf:Description>
       <rdf:Description rdf:about=""
             xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -16,7 +16,7 @@
             xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
             xmlns:stEvt="http://ns.adobe.com/xap/1.0/sType/ResourceEvent#"
             xmlns:stRef="http://ns.adobe.com/xap/1.0/sType/ResourceRef#">
-         <xmpMM:InstanceID>xmp.iid:8ABEC34BE3F0DF1195AE9AC55F0BA41F</xmpMM:InstanceID>
+         <xmpMM:InstanceID>xmp.iid:68E2F3549DF4DF118C19D5D34582AB95</xmpMM:InstanceID>
          <xmpMM:DocumentID>xmp.did:8ABEC34BE3F0DF1195AE9AC55F0BA41F</xmpMM:DocumentID>
          <xmpMM:OriginalDocumentID>xmp.did:4BE637CDDD2CDF11ACC9DFF7EB1D350D</xmpMM:OriginalDocumentID>
          <xmpMM:History>
@@ -87,6 +87,18 @@
                   <stEvt:when>2010-11-16T01:10:30+07:00</stEvt:when>
                   <stEvt:softwareAgent>Adobe Flash Professional CS5</stEvt:softwareAgent>
                   <stEvt:changed>/</stEvt:changed>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>created</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:67E2F3549DF4DF118C19D5D34582AB95</stEvt:instanceID>
+                  <stEvt:when>2010-03-11T14:14:58+07:00</stEvt:when>
+                  <stEvt:softwareAgent>Adobe Flash Professional CS5</stEvt:softwareAgent>
+               </rdf:li>
+               <rdf:li rdf:parseType="Resource">
+                  <stEvt:action>created</stEvt:action>
+                  <stEvt:instanceID>xmp.iid:68E2F3549DF4DF118C19D5D34582AB95</stEvt:instanceID>
+                  <stEvt:when>2010-03-11T14:14:58+07:00</stEvt:when>
+                  <stEvt:softwareAgent>Adobe Flash Professional CS5</stEvt:softwareAgent>
                </rdf:li>
             </rdf:Seq>
          </xmpMM:History>

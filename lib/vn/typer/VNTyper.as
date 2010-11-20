@@ -25,13 +25,20 @@
 		private var _target		: InteractiveObject;	/** Focus listening target **/
 		
 		private var _ignore		: Dictionary;	/** Automatically disable VNTyper for registered Textfields or Fonts **/
-		private var _font2Enc	: Object;		/** Automatically change encoder based on registed fonts, use Unicode as default **/
-		private var _encoders	: Object;		/** Saved encoderId **/
+		
+		private var _encoders	: Object;		/* encoderId to Encoders */
+		private var _fonts		: Dictionary;	/* font to fontId, and fontId to font */
+		
+		private var _fn2Font	: Object;		/* fontName to font */
+		private var _fn2Enc		: Object;		/* fontName to encoder */
 		
 		public function VNTyper() {
 			_core		= new VNTyperCore().setMode(new TelexVniMode());
 			_ignore		= new Dictionary(true);
-			_font2Enc	= { };
+			_fonts		= new Dictionary();
+			
+			_fn2Font = { };
+			_fn2Enc	= { };
 			_encoders	= { };
 		}
 		
@@ -39,9 +46,9 @@
 		 * Add or remove font or textfield from ignore group (as if using english mode). Remember that once disable, the font, or textfield registed can not be enabled again, so be careful
 		 * @param	fontOrTextfield
 		 */
-		public function disableTyperFor(fontNameOrTextfield: * ): VNTyper {
+		public function disableTyperFor(fontIdOrTextfield: * ): VNTyper {
 			//TODO : check for fontName and acts differently
-			_ignore[fontNameOrTextfield] = 1;
+			_ignore[fontIdOrTextfield] = 1;
 			return this;
 		}
 		
@@ -51,7 +58,11 @@
 		 * @return
 		 */
 		public function addEncoder(encoder: Encoder): VNTyper {
-			_encoders[encoder.id] = encoder;
+			if (_encoders[encoder.id] != null) {
+				trace(this, " Warning :: ", encoder.id, " already registered");
+			} else {
+				_encoders[encoder.id] = encoder;
+			}
 			return this;
 		}
 		
@@ -61,12 +72,37 @@
 		 * @param	encoderId
 		 * @return
 		 */
-		public function addFont(fontName: String, encoderId: String = null): VNTyper {
-			//TODO : if there is only 1 encoder in the dict and encoderId == null, use it
-			var enc : Encoder = _encoders[encoderId];
-			//TODO : check existed fontName and trace warning
-			_font2Enc[fontName] = enc;
+		public function addFont(fontId: String, fontClass : Font, encoderOrEncoderId: * = null): VNTyper {
+			var enc			: Encoder;
+			var fontName	: String = fontClass.fontName;
 			
+			//TODO : check if encoderOrEncoderId == null && get the only encoder if there's only one
+			if (encoderOrEncoderId is Encoder) {
+				enc = encoderOrEncoderId as Encoder;
+			} else {
+				enc = _encoders[encoderOrEncoderId];
+			}
+			
+			if (!enc) {//exit on no encoder found
+				trace(this, "fail to register fontId ", fontId, " to a null encoder or encoderId");
+				return this;
+			}
+			
+			if (_fonts[fontClass] != null) {//exit on fontClass registered
+				trace(this, fontName, " already registered");
+				return this;
+			}
+			
+			if (_fonts[fontId] != null) {//exit on fontId registered
+				trace(this, fontId, "already registered with ", fontName);
+				return this;
+			}
+			
+			_fonts[fontId] = fontClass;
+			_fonts[fontClass] = fontId;
+			
+			_fn2Font[fontName] = fontClass;
+			_fn2Enc[fontName] = enc;
 			return this;
 		}
 		
@@ -94,11 +130,29 @@
 		
 		private function onFocusChanged(e:FocusEvent):void 
 		{
-			_core.startMonitor(e.target as TextField);
-			if (e.target is TextField) {
+			var tf : TextField = e.target as TextField;
+			_core.startMonitor(tf);
+			if (tf != null) {
 				//TODO	: check font at keyboard position and switch encoder
 				//TODO	: check ignore textfield, ignore fonts
+				var tformat : TextFormat = tf.getTextFormat();
+				_core.setEncoder(_fn2Enc[tformat.font]);
 			}
+		}
+		
+		public function applyFont(tf: TextField, fontIdOrFontClass: * ): void {
+			var newFont		: Font = (fontIdOrFontClass is Font ? fontIdOrFontClass : _fonts[fontIdOrFontClass]) as Font;
+			var fontName	: String = newFont.fontName; 
+			var tformat		: TextFormat = tf.getTextFormat();
+			var enc			: Encoder = _fn2Enc[tformat.font];
+			var uniString	: String = enc ? enc.toUnicode(tf.text) : tf.text;
+			var newEnc		: Encoder = _fn2Enc[fontName];
+			
+			tformat.font = fontName;
+			//do auto conversion only if there is changed in encoder type
+			if (enc != newEnc) tf.text =  newEnc ? newEnc.fromUnicode(uniString) : uniString;
+			tf.defaultTextFormat = tformat;
+			tf.setTextFormat(tformat);
 		}
 		
 	/***************************

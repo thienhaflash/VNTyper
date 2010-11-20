@@ -1,11 +1,21 @@
-<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#CCCCCC" currentTimeline="1" xflVersion="2.0" creatorInfo="Adobe Flash Professional CS5" platform="Windows" versionInfo="Saved by Adobe Flash Windows 11.0 build 489" majorVersion="11" buildNumber="489" nextSceneIdentifier="5" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false">
+<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#CCCCCC" currentTimeline="1" xflVersion="2.0" creatorInfo="Adobe Flash Professional CS5" platform="Windows" versionInfo="Saved by Adobe Flash Windows 11.0 build 489" majorVersion="11" buildNumber="489" nextSceneIdentifier="8" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false">
+     <fonts>
+          <DOMFontItem name="VNINetbut" itemID="4ce7b78b-00000264" linkageExportForAS="true" linkageBaseClass="flash.text.Font" linkageClassName="VNINetbut_FontClass" font="VNI-Netbut" size="0" id="1" sourceLastImported="1290254796" embeddedCharacters="Bb,CcDdĐđGgHhKkLlMmNnPpQqRrSsTtVvXxAÁÀẢÃẠaáàảãạÂẤẦẨẪẬâấầẩẫậĂẮẰẲẴẶăắằẳẵặEÉÈẼẸẺeéèẻẽẹÊẾỀỂỄỆêếềểễệIÍÌỈĨỊiíìỉĩịOÓÒỎÕỌoóòỏõọÔỐỒỔỖỘôốồổỗộƠỚỜỞỠỢơớờởỡợUÚÙỦŨỤuúùủũụƯỨỪỬỮỰưứừửữựYÝỲỶỸỴyýỳỷỹỵ" embedRanges="1|2|3|4"/>
+     </fonts>
      <symbols>
           <Include href="VNTyper_icon.xml"/>
      </symbols>
      <timelines>
           <DOMTimeline name="Scene 1">
                <layers>
-                    <DOMLayer name="Layer 6" color="#808080" current="true" isSelected="true">
+                    <DOMLayer name="Layer 1" color="#4FFF4F" current="true" isSelected="true">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements/>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+                    <DOMLayer name="Layer 6" color="#808080">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
@@ -325,25 +335,6 @@
      </extendedSwatchLists>
      <PrinterSettings/>
      <publishHistory>
-          <PublishItem publishSize="2301" publishTime="1289844622"/>
-          <PublishItem publishSize="2300" publishTime="1289411673"/>
-          <PublishItem publishSize="2298" publishTime="1289411614"/>
-          <PublishItem publishSize="62583" publishTime="1289407623"/>
-          <PublishItem publishSize="63232" publishTime="1289407587"/>
-          <PublishItem publishSize="64151" publishTime="1289407569"/>
-          <PublishItem publishSize="63481" publishTime="1289407254"/>
-          <PublishItem publishSize="209006" publishTime="1289405059"/>
-          <PublishItem publishSize="208930" publishTime="1289404667"/>
-          <PublishItem publishSize="208917" publishTime="1289404025"/>
-          <PublishItem publishSize="209840" publishTime="1289404006"/>
-          <PublishItem publishSize="208746" publishTime="1289400949"/>
-          <PublishItem publishSize="86293" publishTime="1280391210"/>
-          <PublishItem publishSize="86293" publishTime="1280390933"/>
-          <PublishItem publishSize="84315" publishTime="1280390759"/>
-          <PublishItem publishSize="84320" publishTime="1280390723"/>
-          <PublishItem publishSize="84315" publishTime="1280390653"/>
-          <PublishItem publishSize="84317" publishTime="1280390499"/>
-          <PublishItem publishSize="84317" publishTime="1280390453"/>
-          <PublishItem publishSize="84316" publishTime="1280390431"/>
+          <PublishItem publishSize="85009" publishTime="1290254916"/>
      </publishHistory>
 </DOMDocument>
