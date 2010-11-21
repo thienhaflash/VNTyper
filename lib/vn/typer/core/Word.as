@@ -21,8 +21,11 @@ package vn.typer.core
 			_source = "";
 		}
 		
-		public function putKey(key: int): Boolean {//0-7
-			if (!_source || _source == '' || key < 0 || remain != '') return false; //invalid key
+		public function putKey(key: int, textfieldCaret: int): Boolean {//0-7
+			if (!_source || _source == '' || key < 0) return false; //invalid key
+			
+			//only put caret/accent if the textfieldCaret is not at remain part
+			if (remain != '' && textfieldCaret > firstC.length + vowel.length + lastC.length) return false;
 			
 			//what if it's currently dirty ? - there will never be this case !
 			//TODO : double accent keys should be return (?)
@@ -58,7 +61,7 @@ package vn.typer.core
 			} else if (key < 6) {//of course key is now different from accent, and is accent
 				accent = key; _dirty = true;
 			} else {//the only rest case : key is caret && != current caret
-				if (vowel == 'i' || vowel == 'I' || vowel == 'y' || vowel == 'Y' || (key == 7 && (vowel == 'e' || vowel == "E"))) {// //caret not possible for i, y, and not for e7
+				if (vowel == 'i' || vowel == 'I' || vowel == 'y' || vowel == 'Y' || (key == 7 && (vowel == 'e' || vowel == "E" || vowel=="i"))) {// //caret not possible for i, y, and not for e7
 					//bugfixed :: there is cases when caret == 7 && vowel == "e"
 					return false;
 				} else {
@@ -74,16 +77,19 @@ package vn.typer.core
 			return _source;
 		}
 		
-		public function set source(value:String):void 
+		public function setSource(value:String, textfieldCaret: int):void 
 		{
+			/** BUG FIXED #0001 :: 
+				Smart word spliter based on caret position, only previous part of the word being process
+				We need the textfieldCaret input so we can determine which part to be processed as VN Word
+			**/
 			_source = value;
-			
-			var s : String = _source;
+			var s : String = _source.substr(0, textfieldCaret);
 			s = getFirstC(s);
 			s = getVowelCaretAccent(s);
 			remain = getLastC(s);
+			remain += _source.substring(textfieldCaret);
 			_dirty = true; /* most of the time, it's false but there can be cases when caret need to be move automatically, add */
-			//trace('parsed :: ', _source, '--->', firstC, vowel, lastC, caret, accent); 
 		}
 		
 	/***********************
@@ -129,7 +135,7 @@ package vn.typer.core
 								l = 1;
 								if (sl > 2) {
 									var c : Char = Char.get(getCharOrigin(s, 2));
-									if (c.isVowel) {//gi is now consonant
+									if (c && c.isVowel) {//gi is consonant only if c is a vowel (null catch when c is not a consonant and not a vowel like "w")
 										var v 	: Vowel = Char.getVowel(s.charAt(1));//char i
 										if (v.accent > 0) {//transfer existed accent to next vowel
 											var tmps : String = v.putAccent(0) + Char.getVowel(s.charAt(2)).putAccent(v.accent);

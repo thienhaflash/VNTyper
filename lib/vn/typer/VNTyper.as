@@ -30,7 +30,7 @@
 		private var _fonts		: Dictionary;	/* font to fontId, and fontId to font */
 		
 		private var _fn2Font	: Object;		/* fontName to font */
-		private var _fn2Enc		: Object;		/* fontName to encoder */
+		private var _fid2Enc		: Object;		/* fontName to encoder */
 		
 		public function VNTyper() {
 			_core		= new VNTyperCore().setMode(new TelexVniMode());
@@ -38,7 +38,7 @@
 			_fonts		= new Dictionary();
 			
 			_fn2Font = { };
-			_fn2Enc	= { };
+			_fid2Enc	= { };
 			_encoders	= { };
 		}
 		
@@ -46,7 +46,7 @@
 		 * Add or remove font or textfield from ignore group (as if using english mode). Remember that once disable, the font, or textfield registed can not be enabled again, so be careful
 		 * @param	fontOrTextfield
 		 */
-		public function disableTyperFor(fontIdOrTextfield: * ): VNTyper {
+		public function ignore(fontIdOrTextfield: * ): VNTyper {
 			//TODO : check for fontName and acts differently
 			_ignore[fontIdOrTextfield] = 1;
 			return this;
@@ -59,7 +59,7 @@
 		 */
 		public function addEncoder(encoder: Encoder): VNTyper {
 			if (_encoders[encoder.id] != null) {
-				trace(this, " Warning :: ", encoder.id, " already registered");
+				trace(this, 'Warning :: ', encoder.id, ' already registered');
 			} else {
 				_encoders[encoder.id] = encoder;
 			}
@@ -72,9 +72,8 @@
 		 * @param	encoderId
 		 * @return
 		 */
-		public function addFont(fontId: String, fontClass : Font, encoderOrEncoderId: * = null): VNTyper {
+		public function mapToEncoder(fontId: String, encoderOrEncoderId: * = null, fontClass: Font = null): VNTyper {
 			var enc			: Encoder;
-			var fontName	: String = fontClass.fontName;
 			
 			//TODO : check if encoderOrEncoderId == null && get the only encoder if there's only one
 			if (encoderOrEncoderId is Encoder) {
@@ -84,27 +83,47 @@
 			}
 			
 			if (!enc) {//exit on no encoder found
-				trace(this, "fail to register fontId ", fontId, " to a null encoder or encoderId");
+				trace(this, 'fail to register fontId ', fontId, ' to a null encoder or encoderId');
 				return this;
 			}
 			
+			var oEnc : Encoder = _fid2Enc[fontId];
+			if (!oEnc) {//oEnc associated with fontId not yet exist
+				_fid2Enc[fontId] = enc;
+			} else {
+				trace(this, 'fontId ', fontId, ' already associated with encoder ', oEnc.id);
+			}
+			
+			if (fontClass) mapToFont(fontId, fontClass);
+			return this;
+		}
+		
+		/**
+		 * map fontId to its corresponding fontClass
+		 * @param	fontId
+		 * @param	fontClass
+		 * @return
+		 */
+		public function mapToFont(fontId: String, fontClass: Font): VNTyper {
+			var fontName	: String = fontClass.fontName;
+			
 			if (_fonts[fontClass] != null) {//exit on fontClass registered
-				trace(this, fontName, " already registered");
+				trace(this, fontName, 'already registered with id ', _fonts[fontClass]);
 				return this;
 			}
 			
 			if (_fonts[fontId] != null) {//exit on fontId registered
-				trace(this, fontId, "already registered with ", fontName);
+				trace(this, fontId, 'already registered with ', fontName);
 				return this;
 			}
 			
 			_fonts[fontId] = fontClass;
 			_fonts[fontClass] = fontId;
-			
 			_fn2Font[fontName] = fontClass;
-			_fn2Enc[fontName] = enc;
 			return this;
 		}
+		
+		
 		
 		/**
 		 * set typing mode, can be VniMode, TelexMode, TelexVniMode. The default mode is TelexVniMode
@@ -131,22 +150,34 @@
 		private function onFocusChanged(e:FocusEvent):void 
 		{
 			var tf : TextField = e.target as TextField;
-			_core.startMonitor(tf);
+			if (_ignore[tf] == 1) tf = null;//this textfield is ignored
+			
 			if (tf != null) {
 				//TODO	: check font at keyboard position and switch encoder
-				//TODO	: check ignore textfield, ignore fonts
 				var tformat : TextFormat = tf.getTextFormat();
-				_core.setEncoder(_fn2Enc[tformat.font]);
+				var font	: Font		= _fn2Font[tformat.font];
+				
+				if (_ignore[_fonts[font]] != 1) {//not ignored font
+					_core.startMonitor(tf);
+					_core.setEncoder(font ? _fid2Enc[_fonts[font]] : null);
+					return;
+				}
 			}
+			//encoder is not important here, because we didn't monitor changes
+			_core.startMonitor(null);
 		}
 		
 		public function applyFont(tf: TextField, fontIdOrFontClass: * ): void {
-			var newFont		: Font = (fontIdOrFontClass is Font ? fontIdOrFontClass : _fonts[fontIdOrFontClass]) as Font;
+			var newFontId	: String = fontIdOrFontClass is Font ? _fonts[fontIdOrFontClass] : fontIdOrFontClass ;
+			var newFont		: Font = fontIdOrFontClass is Font ? fontIdOrFontClass as Font : _fonts[fontIdOrFontClass];; ;
 			var fontName	: String = newFont.fontName; 
 			var tformat		: TextFormat = tf.getTextFormat();
-			var enc			: Encoder = _fn2Enc[tformat.font];
+			
+			var enc			: Encoder = _fid2Enc[_fonts[_fn2Font[tformat.font]]];
 			var uniString	: String = enc ? enc.toUnicode(tf.text) : tf.text;
-			var newEnc		: Encoder = _fn2Enc[fontName];
+			var newEnc		: Encoder = _fid2Enc[newFontId];
+			
+			//trace(enc, newFontId, newFont, fontName, enc, uniString, newEnc.id);
 			
 			tformat.font = fontName;
 			//do auto conversion only if there is changed in encoder type
@@ -173,14 +204,14 @@
 		/**
 		 * make sure you call initialize() before get instance
 		 */
-		public static function get instance(): VNTyper {
+		public static function get api(): VNTyper {
 			//TODO : warn if not yet initialized
 			return _instance;
 		}
 		
 		public static function get info(): String {
 			//TODO : warn if not yet initialized
-			return "VNTyper version 0.4.0 by thienhaflash@gmail.com";
+			return 'VNTyper version 0.4.0001 by thienhaflash@gmail.com';
 		}
 	}
 

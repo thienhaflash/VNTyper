@@ -41,13 +41,15 @@ package vn.typer.core
 		
 		public function startMonitor(tf: TextField): VNTyperCore {
 			if (textfield != null) {
-				textfield.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
-				textfield.addEventListener(MouseEvent.MOUSE_DOWN, onMouse);
-				textfield.addEventListener(Event.CHANGE, onInput);
+				textfield.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);//
+				textfield.removeEventListener(KeyboardEvent.KEY_UP, onKeyUp);//update correct caret position which only available onKeyUp
+				textfield.removeEventListener(MouseEvent.MOUSE_DOWN, onMouse);
+				textfield.removeEventListener(Event.CHANGE, onInput);
 			}
+			textfield = tf;
 			if (tf != null) {
-				textfield = tf;
 				tf.addEventListener(KeyboardEvent.KEY_DOWN, onKeyDown);
+				tf.addEventListener(KeyboardEvent.KEY_UP, onKeyUp);
 				tf.addEventListener(MouseEvent.MOUSE_DOWN, onMouse);
 				tf.addEventListener(Event.CHANGE, onInput);
 			}
@@ -95,30 +97,27 @@ package vn.typer.core
 		
 		private function onMouse(e:MouseEvent):void 
 		{
-			moved = true;
+			//is this any necessary ?
+			refreshWord();
 		}
 		
 		protected var rendered				: Boolean = true; /* check if the text is udpated or not */
 		protected var hooked				: Boolean; /* is the suspected accent/caret key pressed is really effective */
-		protected var moved					: Boolean; /* check if we move by mouse/arrows - refresh the word */
+		//protected var moved					: Boolean; /* check if we move by mouse/arrows - refresh the word */
 		protected var savedCaret			: int; /* we need to restore caret position when accent/caret keys is effective */
 		protected var delta					: int;
 		
-		private function onKeyDown(e: KeyboardEvent): void {
 		
-			switch (e.keyCode) {
-				case 37 : 
-				case 38 : 
-				case 39 : 
-				case 40 : 
-				case 46	: 
-				case 8	: moved = true; break;
-			}
-			
-			if (moved) {
-				word.source = getWord(textfield);
-				moved = false;
-			}
+		private function isMoved(keycode: int): Boolean {
+			return (keycode > 32 && keycode < 41) || (keycode == 46) || (keycode == 48);
+		}
+		
+		private function refreshWord(): void {
+			word.setSource(getWord(textfield), textfield.caretIndex - 1 - sIndex);
+		}
+		
+		private function onKeyDown(e: KeyboardEvent): void {
+			if (isMoved(e.keyCode)) refreshWord();
 			
 			rendered = false;
 			hooked = false;
@@ -133,13 +132,21 @@ package vn.typer.core
 				
 				var key		: String = String.fromCharCode(e.charCode);
 				var hkey	: int = typeMode.getHook(key);				
-				if (hkey != -1) hooked = word.putKey(hkey);
+				if (hkey != -1) hooked = word.putKey(hkey, textfield.caretIndex-1-sIndex);
 				if (hooked) {
 					savedCaret = textfield.caretIndex;
 					delta = fromUnicode(word.toString).length - cWord.length;
 					eIndex = cWord.length + sIndex + 1;
 				}
 			}
+		}
+		
+		private function onKeyUp(e: KeyboardEvent): void {//only reset source based on caret position
+			/** BUG FIXED #0001 :: 
+				Smart word spliter based on caret position, only previous part of the word being process
+				We need to update the textfield's caret position correctly which available only onKeyUp
+			**/
+			if (isMoved(e.keyCode)) refreshWord();
 		}
 		
 		private function toUnicode(s: String): String {
@@ -159,7 +166,8 @@ package vn.typer.core
 				idx = textfield.caretIndex;
 				var cWord : String = fromUnicode(word.toString);
 				
-				word.source = getWord(textfield);
+				//word.source = getWord(textfield);
+				word.setSource(getWord(textfield), idx - 1 - sIndex);
 				delta = fromUnicode(word.toString).length - cWord.length - 1;/* ignore the last key */
 				
 				//trace(cWord,'===>', fromUnicode(word.toString));
@@ -173,7 +181,6 @@ package vn.typer.core
 			if (delta < 0) delta = 0;
 			textfield.replaceSelectedText(fromUnicode(word.toString));
 			textfield.setSelection(delta + idx, delta + idx);
-			//trace(hooked, delta, textfield.caretIndex);
 		}
 	}
 }

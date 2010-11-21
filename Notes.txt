@@ -1,4 +1,4 @@
-VNTyper Version 0.4.0
+VNTyper Version 0.4.0001
 
 =========== TODO ============
 
@@ -8,7 +8,7 @@ VNTyper Version 0.4.0
 4.	Add spell checking (?)
 5.	Add return to english if spelling check fail (?)
 6.	Implement auto test input string (input > output)
-
+7.	Fix caret position bug in VniEncoder (automatically move the caret to the correct position, perform addition check when delete/backspace)
 
 =========== Strings to test ============ 
 
@@ -32,6 +32,8 @@ hy7			hy7
 hew			hew
 he7			he7
 
+eng<<<vieejt	việteng
+
 =========== Developer's Notes ============ 
 
 This part is for anyone who wants to contribute or dive into the code to understand how things in this library works
@@ -53,3 +55,6 @@ This part is for anyone who wants to contribute or dive into the code to underst
 		TelexVniMode: Mix of Telex and Vni mode (can use both numeric or alphabets for accents and carets)
 		(you can add more TypingModes like VIQR, MS VI, ... by extending TypeMode just like VniEncoder)
 
+=========== BUG FIXES ============ 
+
+#0001	: word split should be based on caret position so people can put the caret onto the previously part of the word only
