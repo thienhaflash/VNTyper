@@ -140,7 +140,7 @@
 		 * @param	target
 		 * @return
 		 */
-		public function initialize(target: DisplayObject): VNTyper {
+		internal function initialize(target: DisplayObject): VNTyper {
 			//TODO : check if it's already initialized
 			_target = target as InteractiveObject;
 			_target.addEventListener(FocusEvent.FOCUS_IN, onFocusChanged);
