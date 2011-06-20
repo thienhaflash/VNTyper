@@ -1,7 +1,7 @@
-<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#CCCCCC" currentTimeline="1" xflVersion="2.0" creatorInfo="Adobe Flash Professional CS5" platform="Windows" versionInfo="Saved by Adobe Flash Windows 11.0 build 489" majorVersion="11" buildNumber="489" nextSceneIdentifier="11" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false">
+<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" backgroundColor="#CCCCCC" currentTimeline="1" xflVersion="2.0" creatorInfo="Adobe Flash Professional CS5" platform="Macintosh" versionInfo="Saved by Adobe Flash Macintosh 11.0 build 489" majorVersion="11" buildNumber="489" nextSceneIdentifier="11" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false">
      <fonts>
-          <DOMFontItem name="VNIGaramCond" itemID="4ce8bee0-000001d6" linkageExportForAS="true" linkageBaseClass="flash.text.Font" linkageClassName="VNIGaramCond_FontClass" font="VNIGaramCond-Bold" size="0" id="2" sourceLastImported="1290321763" embeddedCharacters="Bb,CcDdĐđGgHhKkLlMmNnPpQqRrSsTtVvXxAÁÀẢÃẠaáàảãạÂẤẦẨẪẬâấầẩẫậĂẮẰẲẴẶăắằẳẵặEÉÈẼẸẺeéèẻẽẹÊẾỀỂỄỆêếềểễệIÍÌỈĨỊiíìỉĩịOÓÒỎÕỌoóòỏõọÔỐỒỔỖỘôốồổỗộƠỚỜỞỠỢơớờởỡợUÚÙỦŨỤuúùủũụƯỨỪỬỮỰưứừửữựYÝỲỶỸỴyýỳỷỹỵ" embedRanges="1|2|3|4"/>
           <DOMFontItem name="VNINetbut" itemID="4ce7b78b-00000264" linkageExportForAS="true" linkageBaseClass="flash.text.Font" linkageClassName="VNINetbut_FontClass" font="VNI-Netbut" size="0" id="1" sourceLastImported="1290254796" embeddedCharacters="Bb,CcDdĐđGgHhKkLlMmNnPpQqRrSsTtVvXxAÁÀẢÃẠaáàảãạÂẤẦẨẪẬâấầẩẫậĂẮẰẲẴẶăắằẳẵặEÉÈẼẸẺeéèẻẽẹÊẾỀỂỄỆêếềểễệIÍÌỈĨỊiíìỉĩịOÓÒỎÕỌoóòỏõọÔỐỒỔỖỘôốồổỗộƠỚỜỞỠỢơớờởỡợUÚÙỦŨỤuúùủũụƯỨỪỬỮỰưứừửữựYÝỲỶỸỴyýỳỷỹỵ" embedRanges="1|2|3|4"/>
+          <DOMFontItem name="VNIGaramCond" itemID="4ce8bee0-000001d6" linkageExportForAS="true" linkageBaseClass="flash.text.Font" linkageClassName="VNIGaramCond_FontClass" font="VNIGaramCond-Bold" size="0" id="2" sourceLastImported="1290321763" embeddedCharacters="Bb,CcDdĐđGgHhKkLlMmNnPpQqRrSsTtVvXxAÁÀẢÃẠaáàảãạÂẤẦẨẪẬâấầẩẫậĂẮẰẲẴẶăắằẳẵặEÉÈẼẸẺeéèẻẽẹÊẾỀỂỄỆêếềểễệIÍÌỈĨỊiíìỉĩịOÓÒỎÕỌoóòỏõọÔỐỒỔỖỘôốồổỗộƠỚỜỞỠỢơớờởỡợUÚÙỦŨỤuúùủũụƯỨỪỬỮỰưứừửữựYÝỲỶỸỴyýỳỷỹỵ" embedRanges="1|2|3|4"/>
      </fonts>
      <symbols>
           <Include href="VNTyper_icon.xml"/>
@@ -9,18 +9,18 @@
      <timelines>
           <DOMTimeline name="Scene 1">
                <layers>
-                    <DOMLayer name="Layer 1" color="#4FFF4F" current="true" isSelected="true">
+                    <DOMLayer name="Layer 1" color="#4FFF4F">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements/>
                               </DOMFrame>
                          </frames>
                     </DOMLayer>
-                    <DOMLayer name="Layer 6" color="#808080">
+                    <DOMLayer name="Layer 6" color="#808080" current="true" isSelected="true">
                          <frames>
                               <DOMFrame index="0" keyMode="9728">
                                    <elements>
-                                        <DOMSymbolInstance libraryItemName="VNTyper_icon" name="" centerPoint3DX="8" centerPoint3DY="8">
+                                        <DOMSymbolInstance libraryItemName="VNTyper_icon" name="" selected="true" centerPoint3DX="8" centerPoint3DY="8">
                                              <transformationPoint>
                                                   <Point x="7" y="7"/>
                                              </transformationPoint>
@@ -334,7 +334,7 @@
                </swatches>
           </swatchList>
      </extendedSwatchLists>
-     <PrinterSettings/>
+     <PrinterSettings platform="macintosh"/>
      <publishHistory>
           <PublishItem publishSize="133233" publishTime="1290321776"/>
           <PublishItem publishSize="85008" publishTime="1290321694"/>

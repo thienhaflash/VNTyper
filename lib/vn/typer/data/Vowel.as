@@ -1,5 +1,14 @@
-﻿package vn.typer.core 
+﻿package vn.typer.data 
 {
+	/**
+	 * Vowel Data structure for VNTyper, adding key, accent information
+	 * 
+	 * @author	thienhaflash (thienhaflash@gmail.com)
+	 * @version 0.5.0
+	 * @updated	18 June 2011
+	 * 		
+	 */
+	
 	public class Vowel extends Char {
 		protected var _accent	: int; /* 0..5 */
 		protected var _caret	: int; /* 0,6,7 */
@@ -60,7 +69,8 @@
 		public function putCaret(c: int): String {
 			var chr : String = getOrigin(data.charAt(_isUpcase ? 0 : 6));//remove the accent + caret
 			var s : String = (c == 0) ? chr : caretObj[chr + c];
-			return (_accent > 0) ? Char.getVowel(s).putAccent(_accent) : s;
+			if (s == null) s = chr; //ignore caret if can not put
+			return _accent > 0 ? Char.getVowel(s).putAccent(_accent) : s;
 		}
 		
 		/**

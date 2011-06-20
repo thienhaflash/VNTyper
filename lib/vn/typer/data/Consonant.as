@@ -1,7 +1,16 @@
-﻿package vn.typer.core 
+﻿package vn.typer.data 
 {
-	public class Consonant extends Char {
+	/**
+	 * Consonant Data structure for VNTyper
+	 * 
+	 * @author	thienhaflash (thienhaflash@gmail.com)
+	 * @version 0.5.0
+	 * @updated	18 June 2011
+	 * 		
+	 */
 		
+	public class Consonant extends Char {
+	
 		public function Consonant(_up: Boolean, _ul: String) { /* dat : 2 chars */
 			super(false, _up, _ul);
 		}

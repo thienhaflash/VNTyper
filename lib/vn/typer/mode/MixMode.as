@@ -1,8 +1,15 @@
-﻿package vn.typer.modes 
+﻿package vn.typer.mode 
 {
 	import vn.typer.core.TypeMode;
-	
-	public class TelexVniMode extends TypeMode
+	/**
+	 * Mix Typing Mode allows user to input keys (accents + caret) in both tetex and vni way
+	 * 
+	 * @author	thienhaflash (thienhaflash@gmail.com)
+	 * @version 0.5.0
+	 * @updated	18 June 2011
+	 * 
+	 */ 
+	public class MixMode extends TypeMode
 	{
 		override public function getHook(s:String):int 
 		{
@@ -25,6 +32,11 @@
 			//trace('get hook of ', s, i);
 			return i;
 		}
+		
+		
+		private static var _instance : MixMode;
+		public static function get instance() : MixMode { return _instance ||= new MixMode(); }
+		public static function get id(): String { return 'mix' };
 		
 	}
 

@@ -1,8 +1,16 @@
 ﻿package vn.typer.core
 {
+	/**
+	 * Base class for all typing mode in VNTyper library
+	 * 
+	 * @author	thienhaflash (thienhaflash@gmail.com)
+	 * @version 0.5.0
+	 * @updated	18 June 2011
+	 * 		
+	 */ 
 	public class TypeMode
 	{
-		public static var D9 : int = 59;
+		public static var D9 : int = 59;//need to check existance of D
 		public static var A6 : int = 60;//need to check existance of A
 		public static var E6 : int = 61;//need to check existance of E
 		public static var O6 : int = 62;//need to check existance of O
@@ -37,10 +45,6 @@
 			return k;
 		}
 		
-		public function getHook(s: String): int {
-			return -1;
-		}
-		
 		public static function isAccent(i: int): Boolean {
 			return i > -1 && i < 6;
 		}
@@ -50,6 +54,6 @@
 		}
 		
 		
+		public function getHook(s: String): int { return -1; }
 	}
-
 }

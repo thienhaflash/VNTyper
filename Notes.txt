@@ -1,4 +1,4 @@
-VNTyper Version 0.4.0001
+VNTyper Version 0.5
 
 =========== TODO ============
 
@@ -33,6 +33,15 @@ hew			hew
 he7			he7
 
 eng<<<vieejt	việteng
+
+tuew		tuew
+
+
+Known Bugs
+tuwe	-->	tue
+
+
+
 
 =========== Developer's Notes ============ 
 

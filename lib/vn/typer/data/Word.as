@@ -1,7 +1,21 @@
-package vn.typer.core 
+package vn.typer.data 
 {
 	import flash.utils.Dictionary;
+	import vn.typer.core.TypeMode;
 	
+	/**
+	 * Word used handle the Viet Nam word
+	 * 
+	 * Split into parts firstC (first consonant - optional), vowel, 
+	 * lastC (last consonant - optional), remain (unrelated things), caret, accents
+	 * and replace the parts by allowing setKey() to add/remove/modify accents and carets
+	 * 
+	 * @author	thienhaflash (thienhaflash@gmail.com)
+	 * @version 0.5.0
+	 * @updated	18 June 2011
+	 * 
+	 */
+		
 	public class Word
 	{
 		public var isVN		: Boolean; /* is this word VN or not */
@@ -61,7 +75,12 @@ package vn.typer.core
 			} else if (key < 6) {//of course key is now different from accent, and is accent
 				accent = key; _dirty = true;
 			} else {//the only rest case : key is caret && != current caret
-				if (vowel == 'i' || vowel == 'I' || vowel == 'y' || vowel == 'Y' || (key == 7 && (vowel == 'e' || vowel == "E" || vowel=="i"))) {// //caret not possible for i, y, and not for e7
+				
+				//bug fixed :: check sign against the correct vowel char only
+				//(formerly only check single vowel, doesn't work for not a group of vowels)
+				var vw : String = vowel.length>1 ? vowel.charAt(accentPos[vowel.toUpperCase()]) : vowel;
+				vw.toLowerCase();
+				if (vw == 'i' || vw == 'y' || (key == 7 && (vw == 'e' || vw=="i"))) {// //caret not possible for i, y, and not for e7
 					//bugfixed :: there is cases when caret == 7 && vowel == "e"
 					return false;
 				} else {
@@ -261,13 +280,19 @@ package vn.typer.core
 				
 				mid = vowel.substr(0, p); //temporary string
 				var v : Vowel = Char.getVowel(vowel.charAt(p));
+				
+				trace('0 : ', v.base, caret, accent);
+				
 				if (caret > 0) {//has caret to put
 					if (caret == 7 && up.charAt(0) == 'U' && up.charAt(1) == 'O' && (lastC != '' || up.charAt(2) == 'I' || up.charAt(2)=='U')) {/* special case :: dual caret */
 						mid = up.charAt(0) == vowel.charAt(0) ? 'Ư' : 'ư';
 						v = Char.getVowel(v.isUpcase ? 'Ơ' : 'ơ');
 					} else {
+						trace(v.putCaret(caret));
 						v = Char.getVowel(v.putCaret(caret));//put the caret in
 					}
+					
+					trace('1 : ', v.base, caret, accent);
 				}
 				if (accent > 0) v = Char.getVowel(v.putAccent(accent));//put accent in
 				mid += v.char + vowel.substr(p+1);

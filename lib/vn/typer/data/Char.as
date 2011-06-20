@@ -1,5 +1,22 @@
-﻿package vn.typer.core 
+﻿package vn.typer.data 
 {
+	/**
+	 * Character Data structure for VNTyper
+	 * 
+	 * This class is the base class for Consonant and Vowel, actually Char 
+	 * is not used directly, each instance is either Vowel or Consonant
+	 * with all the information attached to it : _isVowel, _isUppercase, ...
+	 * It also provide utilities like character look up, find uppercase, lowercase
+	 * base (no accent, uppercase) of a consonant or vowel, origin of a vowel
+	 * (no accents, no carets, uppercase)
+	 * 
+	 * 
+	 * @author	thienhaflash (thienhaflash@gmail.com)
+	 * @version 0.5.0
+	 * @updated	18 June 2011
+	 * 		
+	 */ 
+		
 	public class Char {
 		protected static var dict	: Object; /* dictionary of all characters, points from the character (a)--> Char instance of (a) */
 		
@@ -25,7 +42,7 @@
 		 * get the character itself
 		 */
 		public function get char(): String {
-			return (isUpcase) ? up : low;
+			return isUpcase ? up : low;
 		}
 		
 		/**

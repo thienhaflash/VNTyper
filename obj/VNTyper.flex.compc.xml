@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <flex-config xmlns="http://www.adobe.com/2006/flex-config">
-  <output>D:\github\VNTyper\.\bin\VNTyper.swc</output>
+  <output>E:\VNTyper_new\.\bin\VNTyper.swc</output>
   <use-network>true</use-network>
   <target-player>9</target-player>
   <warnings>true</warnings>
@@ -17,23 +17,30 @@
     <use-resource-bundle-metadata>true</use-resource-bundle-metadata>
     <verbose-stacktraces>false</verbose-stacktraces>
     <source-path>
-      <path-element>d:\github\vntyper\lib</path-element>
-      <path-element>d:\github\vntyper\src</path-element>
+      <path-element>e:\vntyper_new\lib</path-element>
+      <path-element>e:\vntyper_new\src</path-element>
     </source-path>
+    <library-path>
+      <path-element>e:\vntyper_new\lib\vntyperskin.swc</path-element>
+    </library-path>
   </compiler>
   <include-classes>
     <class>vn.typer.VNTyper</class>
-    <class>vn.typer.core.Char</class>
-    <class>vn.typer.core.Consonant</class>
     <class>vn.typer.core.Encoder</class>
+    <class>vn.typer.core.IVNTyper</class>
     <class>vn.typer.core.TypeMode</class>
+    <class>vn.typer.core.VNTyperApi</class>
     <class>vn.typer.core.VNTyperCore</class>
-    <class>vn.typer.core.Vowel</class>
-    <class>vn.typer.core.Word</class>
+    <class>vn.typer.data.Char</class>
+    <class>vn.typer.data.Consonant</class>
+    <class>vn.typer.data.Vowel</class>
+    <class>vn.typer.data.Word</class>
     <class>vn.typer.encode.VniEncoder</class>
-    <class>vn.typer.modes.TelexMode</class>
-    <class>vn.typer.modes.TelexVniMode</class>
-    <class>vn.typer.modes.VniMode</class>
-    <!--<class>VNTyperTest</class>-->
+    <class>vn.typer.mode.MixMode</class>
+    <class>vn.typer.mode.TelexMode</class>
+    <class>vn.typer.mode.VniMode</class>
+    <class>vn.typer.utils.initVNTyper</class>
+    <class>vn.typer.utils.initVNTyper2</class>
+    <class>VNTyperTest</class>
   </include-classes>
 </flex-config>

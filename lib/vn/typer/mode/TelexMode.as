@@ -1,7 +1,14 @@
-﻿package vn.typer.modes
+﻿package vn.typer.mode
 {
 	import vn.typer.core.TypeMode;
-	
+	/**
+	 * Telex Typing Mode adds telex input method support for VNTyper
+	 * 
+	 * @author	thienhaflash (thienhaflash@gmail.com)
+	 * @version 0.5.0
+	 * @updated	18 June 2011
+	 * 
+	 */ 
 	public class TelexMode extends TypeMode
 	{
 		override public function getHook(s:String):int 
@@ -21,6 +28,9 @@
 			return i;
 		}
 		
+		private static var _instance : TelexMode;
+		public static function get instance() : TelexMode { return _instance ||= new TelexMode(); }
+		public static function get id(): String { return 'telex' };
 	}
 
 }

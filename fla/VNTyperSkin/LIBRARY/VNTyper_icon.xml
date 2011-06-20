@@ -1,8 +1,8 @@
 <DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="VNTyper_icon" itemID="4cdac51c-000001fc" linkageExportForAS="true" linkageClassName="VNTyper_icon" sourceLibraryItemHRef="Symbol 1" lastModified="1289411656">
   <timeline>
-    <DOMTimeline name="VNTyper_icon" currentFrame="1">
+    <DOMTimeline name="VNTyper_icon">
       <layers>
-        <DOMLayer name="Layer 2" color="#9933CC">
+        <DOMLayer name="Layer 2" color="#9933CC" current="true" isSelected="true">
           <frames>
             <DOMFrame index="0" keyMode="9728">
               <elements>
@@ -48,7 +48,7 @@
             </DOMFrame>
           </frames>
         </DOMLayer>
-        <DOMLayer name="Layer 4" color="#FF4FFF" current="true" isSelected="true">
+        <DOMLayer name="Layer 4" color="#FF4FFF">
           <frames>
             <DOMFrame index="0" keyMode="9728">
               <elements>
@@ -71,8 +71,8 @@
                     </StrokeStyle>
                   </strokes>
                   <edges>
+                    <Edge fillStyle0="1" edges="!300 20|300 300!300 300|20 300!20 300|20 20!20 20|300 20!320 320|320 0!320 0|0 0!0 0|0 320!0 320|320 320"/>
                     <Edge fillStyle1="2" strokeStyle="1" edges="!290 30|290 290!290 290|30 290!30 290|30 30!30 30|290 30"/>
-                    <Edge fillStyle0="1" edges="!320 320|320 0!320 0|0 0!0 0|0 320!0 320|320 320!300 20|300 300!300 300|20 300!20 300|20 20!20 20|300 20"/>
                     <Edge cubics="!290 30(;290,30 290,290 290,290q290 30 290 290);"/>
                     <Edge cubics="!290 290(;290,290 30,290 30,290q290 290 30 290);"/>
                     <Edge cubics="!30 290(;30,290 30,30 30,30q30 290 30 30);"/>
@@ -110,8 +110,8 @@
                     </StrokeStyle>
                   </strokes>
                   <edges>
+                    <Edge fillStyle0="2" edges="!300 300|20 300!20 300|20 20!20 20|300 20!300 20|300 300!320 0|0 0!0 0|0 320!0 320|320 320!320 320|320 0"/>
                     <Edge fillStyle1="1" strokeStyle="1" edges="!290 290|30 290!30 290|30 30!30 30|290 30!290 30|290 290"/>
-                    <Edge fillStyle0="2" edges="!320 0|0 0!0 0|0 320!0 320|320 320!320 320|320 0!300 300|20 300!20 300|20 20!20 20|300 20!300 20|300 300"/>
                     <Edge cubics="!290 30(;290,30 290,290 290,290q290 30 290 290);"/>
                     <Edge cubics="!290 290(;290,290 30,290 30,290q290 290 30 290);"/>
                     <Edge cubics="!30 290(;30,290 30,30 30,30q30 290 30 30);"/>

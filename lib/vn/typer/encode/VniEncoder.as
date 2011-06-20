@@ -3,6 +3,14 @@ package vn.typer.encode
 	import flash.utils.Dictionary;
 	import vn.typer.core.Encoder;
 	
+	/**
+	 * VNI Encoder adds VNI-encoding method support for VNTyper
+	 * 
+	 * @author	thienhaflash (thienhaflash@gmail.com)
+	 * @version 0.5.0
+	 * @updated	18 June 2011
+	 * 
+	 */ 
 	public class VniEncoder extends Encoder
 	{
 		protected var uni2vni	: Dictionary;
@@ -10,7 +18,6 @@ package vn.typer.encode
 		
 		public function VniEncoder() 
 		{
-			_id = "VniEncoder";
 			var sVni 	: Array = 'AØ,AÙ,AÂ,AÕ,EØ,EÙ,EÂ,Ì,Í,OØ,OÙ,OÂ,OÕ,UØ,UÙ,AÊ,Ñ,Ó,UÕ,Ô,aø,aù,aâ,aõ,eø,eù,eâ,ì,í,oø,où,oâ,oõ,uø,uù,aê,ñ,ó,uõ,ô,Ö,AÊ,AÏ,AÛ,AÁ,AÀ,AÅ,AÃ,AÄ,AÉ,AÈ,AÚ,AÜ,AË,EÏ,EÛ,EÕ,EÁ,EÀ,EÅ,ö,aê,aï,aû,aá,aà,aå,aã,aä,aé,aè,aú,aü,aë,eï,eû,eõ,eá,eà,eå,EÃ,EÄ,Æ,Ò,OÏ,OÛ,OÁ,OÀ,OÅ,OÃ,OÄ,ÔÙ,ÔØ,ÔÛ,ÔÕ,ÔÏ,UÏ,UÛ,ÖÙ,ÖØ,eã,eä,æ,ò,oï,oû,oá,oà,oå,oã,oä,ôù,ôø,ôû,ôõ,ôï,uï,uû,öù,öø,ÖÛ,ÖÕ,ÖÏ,YØ,Î,YÙ,YÛ,YÕ,öû,öõ,öï,yù,yø,î,yû,yõ'.split(',');
 			var sUni	: Array = 'À,Á,Â,Ã,È,É,Ê,Ì,Í,Ò,Ó,Ô,Õ,Ù,Ú,Ă,Đ,Ĩ,Ũ,Ơ,à,á,â,ã,è,é,ê,ì,í,ò,ó,ô,õ,ù,ú,ă,đ,ĩ,ũ,ơ,Ư,Ă,Ạ,Ả,Ấ,Ầ,Ẩ,Ẫ,Ậ,Ắ,Ằ,Ẳ,Ẵ,Ặ,Ẹ,Ẻ,Ẽ,Ế,Ề,Ể,ư,ă,ạ,ả,ấ,ầ,ẩ,ẫ,ậ,ắ,ằ,ẳ,ẵ,ặ,ẹ,ẻ,ẽ,ế,ề,ể,Ễ,Ệ,Ỉ,Ị,Ọ,Ỏ,Ố,Ồ,Ổ,Ỗ,Ộ,Ớ,Ờ,Ở,Ỡ,Ợ,Ụ,Ủ,Ứ,Ừ,ễ,ệ,ỉ,ị,ọ,ỏ,ố,ồ,ổ,ỗ,ộ,ớ,ờ,ở,ỡ,ợ,ụ,ủ,ứ,ừ,Ử,Ữ,Ự,Ỳ,Ỵ,Ý,Ỷ,Ỹ,ử,ữ,ự,ý,ỳ,ỵ,ỷ,ỹ'.split(',');
 			
@@ -39,7 +46,6 @@ package vn.typer.encode
 					ns += cs != null ? cs : s.charAt(i);
 				}
 			}
-			
 			return ns;
 		}
 		
@@ -55,9 +61,9 @@ package vn.typer.encode
 			return ns;
 		}
 		
-		public static function get id(): String {
-			return "VniEncoder";
-		}
+		private static var _instance : VniEncoder;
+		public static function get instance() : VniEncoder { return _instance ||= new VniEncoder(); }
+		public static function get id(): String { return 'vni' };
 	}
 
 }
